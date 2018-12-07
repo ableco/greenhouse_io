@@ -60,6 +60,14 @@ module GreenhouseIo
       get_from_harvest_api "/applications#{path_id(id)}", options
     end
 
+    def reject_application(id, application_rejection_hash, on_behalf_of)
+      post_to_harvest_api(
+        "/applications/#{id}/reject",
+        application_rejection_hash,
+        { 'On-Behalf-Of' => on_behalf_of.to_s }
+      )
+    end
+
     def offers_for_application(id, options = {})
       get_from_harvest_api "/applications/#{id}/offers", options
     end
